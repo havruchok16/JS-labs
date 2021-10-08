@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    <script>
+        //Task 1
+        function EnterData(){
+            let data = prompt("Введите что-нибудь", '');
+
+            //приведение к числу
+            let data2 = Number(data);
+
+            document.write("Задание 1 <br>");
+
+            //проверка на число
+            if(!isNaN(data2)){ 
+                //проверка на целое
+                if(Number.isInteger(data2)){ 
+                    //перевод в 16-ую сс
+                    document.write(Number(data2).toString(16).toUpperCase()) 
+                } else{
+                    //округление вещественного числа
+                    document.write(Math.round(data2)); 
+                }
+
+            //если строка
+            } else{
+                //вывести в верхнем и нижнем регистре
+                document.write(data.toUpperCase() + " " + data.toLowerCase());
+            }
+            document.write("<br>");
+        }
+        EnterData();
+
+        //Task 2
+        function CountImages(){
+            let width = +prompt("Введите ширину фотографии", '');
+
+            //количество фотографий, которые могут поместиться в галереи с заданной шириной
+            let count = Math.floor(950/(width + 10));
+
+            //количество фотографий, которые могут поместиться в галереи
+            let spacing = (950 - count*width)/(count - 1);
+
+            document.write("Задание 2 <br>");
+            document.write("Количество фотографий " + count + "<br>");
+            document.write("Размер отступов " + spacing.toFixed(3) + "<br>");
+        }
+        CountImages();
+
+        //Task 3
+        function RoundNumber(){
+            let num = +prompt("Введите число", '');
+            
+            document.write("Задание 3 <br>");
+            document.write(Math.round(num) + " " + Math.floor(num) + " " + Math.ceil(num)); 
+            document.write("<br>");
+        }
+        RoundNumber();
+
+        //Task 4
+        function ChangeBackground(){
+            //перевод в 16-ую сс
+            function Convert(integer) {
+                let str = Number(integer).toString(16);
+                return str.length == 1 ? "0" + str : str;
+            }
+
+            //преобразование в цвет
+            function ToRGB(r, g, b){ 
+                return "#" + Convert(r) + Convert(g) + Convert(b);
+            }
+            
+            //ввод цветовых координат
+            let r = +prompt("r (0-255)", '');
+            let g = +prompt("g (0-255)", '');
+            let b = +prompt("b (0-255)", '');
+
+            let text = confirm("Сделать цвет белым?");
+            if(text == true){
+                //замена цвета текста на белый
+                document.write("<style>h3{color:white; }</style>");
+                document.write("<h3> Задание 4 </h3>" )
+            }
+
+            //замена цвета фона
+            document.body.style.backgroundColor = ToRGB(r, g, b);
+        }
+        ChangeBackground();
+
+        //Task 5
+        function CorrectWord(){
+            let word = "интроверт";
+            let inputWord = prompt("Напишите слово \'интр*верт\' правильно", '')
+
+            //проверка на правильность слова
+            if(word === inputWord){
+                alert("Слово написано правильно");
+            } else{
+                for (let index = 0; index < word.length; index++){
+                    if(word[index] != inputWord[index]){ 
+                        alert(`Ошибка в символе ${inputWord[index]}`);
+                    }
+                }
+            }
+        }
+        CorrectWord();
+
+        //Task 6
+        function Calculate(){
+            let a = +prompt("Первый катет равен", '');
+            let b = +prompt("Второй катет равен", '');
+
+            let c = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+            let s = (a * b)/2; //площадь
+            let p = c + a + b; //периметр
+            let h = (a * b)/c; //высота
+            let m = c/2; //медиана
+            let bis = Math.sqrt(2) * (a * b/(a + b)); //биссектриса
+            let cos = b/c; 
+            let sin = a/c;
+            let tg = a/b;
+            let ctg = b/c;
+
+            document.write("Задание 6 <br>");
+            document.write(`Площадь ${s.toFixed(3)}, Периметр ${p.toFixed(3)},
+            Высота ${h.toFixed(3)}, Медиана ${m.toFixed(3)}, Биссектриса ${bis.toFixed(3)},
+            sin ${sin.toFixed(3)}, cos ${cos.toFixed(3)}, tg ${tg.toFixed(3)}, ctg ${ctg.toFixed(3)}`);
+        }
+        Calculate();
+    </script>
+</body>
+</html>

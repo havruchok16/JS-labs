@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body{
+            background-color: rgb(255, 244, 228);
+        }
+        #slider{
+            margin: 20px;
+        }
+        #slider p{
+            text-align: center;
+        }
+        #slider div{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+        button{
+            background-color: blanchedalmond;
+            height: 30px;
+            margin: 10px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        p{
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+<body>
+    <!-- Задание 1 -->
+    <p>Напишите комментарий</p>
+    <textarea id="comment" maxlength="100"></textarea>
+    <button onclick="PublicateComment()">Опубликовать комментарий</button>
+    <p id="resultComment"></p>
+
+    <!-- Задание 2 -->
+    <p>Напишите свое имя</p>
+    <textarea id="name" maxlength="100"></textarea>
+    <button onclick="PublicateName()">Опубликовать имя</button>
+    <p id="resultName"></p>
+
+    <!-- Задание 3 -->
+    <button onclick="GetDayOfWeek()">Определить день недели</button>
+    <p id="days"></p>
+    
+    <!-- Задание 4 -->
+    <div id="slider">
+        <p id="title">Название слайдера</p>
+        <div>
+            <button id="left" style="width: 50px; height: 50px;">ᐊ</button>
+            <div id="slide" style="margin: 10px; width: 300px; height: 300px; border: 0.5px black solid; background-color: rgb(228, 204, 243);"></div>
+            <button id="right" style="width: 50px; height: 50px;">ᐅ</button>
+        </div>
+    </div>
+    
+    <br> <br>
+
+    <button onclick="ChangeTitle()">Изменить заголовок</button>
+    <button onclick="HideButtons()">Скрыть кнопки</button>
+    <button onclick="ViewButtons()">Показать кнопки</button>
+    <button onclick="ChangeSizeButtons()">Изменить кнопки</button>
+    <button onclick="ChangeSizeSlider()">Изменить размер</button>
+    <button onclick="CopySlider()">Скопировать слайдер</button>
+    
+    <br> <br>
+
+    <!-- Задание 5 -->
+    <button onclick="CreateButton()">Создать кнопку</button>
+    <button onclick="CreateBlock()">Создать блок</button>
+    <button onclick="CreateHeader()">Создать заголовок</button>
+
+    <br> <br>
+
+    <div id="newElements"></div>
+
+    <script>
+       function PublicateComment(){
+           let comm = document.getElementById('comment').value;
+           let resultComm = "";
+
+           //проверка на содержание слов
+           if(comm.includes("кот")){
+               resultComm = comm.replace(/кот/g, "***");
+           } else{
+               resultComm = comm;
+           }
+           if(comm.includes("собак")){
+               resultComm = resultComm.replace(/собак/g, "Собак");
+           }
+           if(comm.includes("пес")){
+               resultComm = resultComm.replace(/пес/g, "многоуважаемый пес");
+           }
+
+           //вывод переменной на страницу
+           document.getElementById('resultComment').innerHTML = resultComm;
+       }
+
+       function PublicateName(){
+           let name = document.getElementById('name').value;
+           let resultName = "";
+
+           //проверка на содержание пробелов
+           if(!name.includes(' ')){
+               resultName = "*** " + name + " ***";
+           } else{
+               resultName = name.replace(' ', "<br>");
+           }
+
+           document.getElementById('resultName').innerHTML = resultName;
+       }
+
+       function GetDayOfWeek(){
+           //создание коллекции
+           let week = new Map();
+           week.set(1, "понедельник")
+            .set(2, "вторник")
+            .set(3, "среда")
+            .set(4, "четверг")
+            .set(5, "пятница")
+            .set(6, "суббота")
+            .set(7, "воскресенье");
+
+            let count = 0;
+            let days = "";
+
+            //нахождение нечетных дней и их подсчет
+            week.forEach(function(item, i){
+                if (!(i % 2 == 0)) {
+                    days += `${i} - ${item} `;
+                    count++;
+            }
+            })
+
+            let day = +prompt("Введите номер дня недели (от 1 до 7)", '');
+            alert(week.get(day));
+
+            document.getElementById('days').innerHTML = "Количество дней: " + count + "<br>" + days;
+        }
+
+        function ChangeTitle(){
+            let title = prompt("Введите новый заголовок слайдера", '');
+            document.getElementById('title').innerHTML = title;
+        }
+
+        function HideButtons(){
+            document.getElementById('left').style.display = "none";
+            document.getElementById('right').style.display = "none";
+        }
+
+        function ViewButtons(){
+            document.getElementById('left').style.display = "block";
+            document.getElementById('right').style.display = "block";
+        }
+
+        function ChangeSizeButtons(){
+            let size = +prompt("Введите размер кнопок", '');
+            document.getElementById('left').style.width = size + "px";
+            document.getElementById('left').style.height = size + "px";
+            document.getElementById('right').style.width = size + "px";
+            document.getElementById('right').style.height = size + "px";
+        }
+
+        function ChangeSizeSlider(){
+            let size = +prompt("Введите размер слайда", '');
+            document.getElementById('slide').style.width = size + "px";
+            document.getElementById('slide').style.height = size + "px";
+        }
+
+        function CopySlider(){
+            let header = prompt("Введите заголовок нового слайдера", '');
+            let slider = document.getElementById('slider');
+            let clone = slider.cloneNode(true);
+            clone.querySelector('p').innerHTML = header; 
+            document.body.appendChild(clone);
+        }
+
+        function CreateButton(){
+            let button = document.createElement("button");
+            button.innerHTML = "Button";
+            button.style.fontFamily = "Times New Roman";
+            button.style.fontSize = "20px";
+            button.style.backgroundColor = "lightpink";
+            button.style.width = "100px";
+            button.style.height = "50px";
+            document.getElementById('newElements').append(button);
+        }
+
+        function CreateBlock(){
+            let div = document.createElement("div");
+            div.innerHTML = "Block";
+            div.style.fontFamily = "Times New Roman";
+            div.style.fontSize = "20px";
+            div.style.textAlign = "center";
+            div.style.backgroundColor = "lightblue";
+            div.style.width = "100px";
+            document.getElementById('newElements').append(div);
+        }
+
+        function CreateHeader(){
+            let header = document.createElement("header");
+            header.innerHTML = "Header";
+            header.style.fontFamily = "Times New Roman";
+            header.style.fontSize = "20px";
+            header.style.textDecoration = "underline";
+            header.style.textAlign = "center";
+            header.style.color = "pink";
+            header.style.width = "100px";
+            document.getElementById('newElements').append(header);
+        }
+    </script>
+</body>
+</html>

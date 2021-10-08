@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    <script>
+        function f1(){
+            const PI = 3.14;
+
+            let radius = prompt("Введите радиус", '');
+
+            let area = PI*Math.pow(radius, 2);
+            let diameter = radius*2;
+            let length = 2*PI*radius;
+
+            document.write("Задание 1 " + "<br>");
+            document.write("Радиус = " + radius + "<br>");
+            document.write("Площадь = " + area + "<br>");
+            document.write("Диаметр = " + diameter + "<br>");
+            document.write("Длина = " + length + "<br>");
+        }
+        f1();
+
+        function f2(){
+            let money = 1000;
+            let price;
+            let result_price = 0;
+
+            while(price != '0'){
+                price = +prompt("Введите стоимость товара", '');
+                if(money - price >= 0){
+                    money -= price;
+                    result_price += price;
+                } else{
+                    alert("Завершите покупку (введите 0) или выберите товар с меньшей стоимостью");
+                }
+            }
+            
+            alert("Вы совершили заказ на сумму = " + result_price);
+        }
+        f2();
+
+        function f3(){
+            let parameter3 = prompt("Введите третий параметр", '');
+
+            function ff3(parameter1 = 1, parameter2 = 2, parameter3){
+                return parameter1 + " " + parameter2 + " " + parameter3;
+            }
+            document.write("Задание 3" + "<br>");
+            document.write(ff3(undefined, undefined, parameter3));
+        }
+        f3();
+
+        function f4(){
+            let count = 0;
+            let student;
+
+            while(student != '0'){
+                student = prompt("Введите имя студента, при окончании введите 0", '');
+                if(student != '0'){
+                    count ++;
+                }
+            }
+            document.write("<br>" + "Задание 4" + "<br>");
+            document.write("Количество студентов = " + count + "<br>");
+        }
+        f4();
+
+        function f5(){
+            let a = +prompt("Введите первую сторону", '');
+            let b = +prompt("Введите вторую сторону", '');
+
+            function params(a, b){
+                if(a == b){
+                    return a*4;
+                } else{
+                    return a*b;
+                }
+            }
+
+            let func = function params(a, b){
+                if(a == b){
+                    return a*4;
+                } else{
+                    return a*b;
+                }
+            }(a, b);
+
+            document.write("Задание 5" + "<br>");
+            document.write("Function Declaration " + params(a, b) + "<br>");
+            document.write("Function Expression " + func + "<br>");
+
+        }
+        f5();
+
+        function f6(){
+            const sec_year = 31104000;
+            const sec_month = 2592000;
+            const sec_day = 86400;
+            const sec_hour = 3600;
+            const sec_min = 60;
+
+            let letters = Math.pow(26, 5);
+            let numbers = Math.pow(10, 3);
+            let symbols = letters*numbers;
+            let seconds = symbols*3;
+
+            let year = Math.floor(seconds/sec_year);
+            let _year = seconds%sec_year;
+
+            let month = Math.floor(_year/sec_month);
+            let _month = _year%sec_month;
+
+            let day = Math.floor(_month/sec_day);
+            let _day = _month%sec_day;
+
+            let hour = Math.floor(_day/sec_hour);
+            let _hour = _day%sec_hour;
+
+            let minute = Math.floor(_hour/sec_min);
+
+            let second = _hour%60;
+
+            document.write("Задание 6" + "<br>");
+            document.write(year + " лет " + month + " месяцев " + day + " дней " 
+            + hour + " часов " + minute + " минут " + second + " секунд ");
+        }
+        f6();
+
+        function f7(){
+            _parameter3 = +prompt("Введите третий параметр", '');
+
+            let ff7 = (_parameter1 = 1, _parameter2 = 2, _parameter3) => 
+            _parameter1 + " " + _parameter2 + " " + _parameter3;
+            document.write("<br>" + "Задание 7" + "<br>");
+            document.write(ff7(undefined, undefined, _parameter3));
+        }
+        f7();
+    </script>
+</body>
+</html>

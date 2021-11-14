@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>LABA 10</title>
+</head>
+<body>
+    <p>I'm Component</p>    
+
+    <div class="className" style="background: red; width: 100px; height: 100px;"> </div>
+
+    <script>
+
+        //task 1
+
+        class Component { 
+            constructor(selector) {
+                this.selector = selector;
+            }
+
+            hide() {
+                document.querySelector(this.selector).style.display = "none";
+            }
+
+            show() {
+                document.querySelector(this.selector).style.display = "block";
+            }
+        }
+
+        let component = new Component("p");
+
+        console.log(component);        
+
+        //task 2
+
+        class BlockElement extends Component{
+            constructor(options, selector, className){
+                super(selector);
+                this.options = options;
+                this.className = className;
+                
+                let element = document.createElement(this.selector);
+                element.style.background = this.options.background;
+                element.style.width = this.options.width;
+                element.style.height = this.options.height;
+                document.body.append(element);
+                element.setAttribute("class", className);
+            }
+
+            setSize(size){
+                document.querySelector(`.${this.className}`).style.width = size + "px";
+                document.querySelector(`.${this.className}`).style.height = size + "px";
+            }
+
+            setColor(color){
+                document.querySelector(`.${this.className}`).style.background = color;
+            }
+
+            setCircle(radius) {
+                document.querySelector(`.${this.className}`).style.borderRadius = radius + "px";
+            }
+        }
+
+        
+        function getOptions(selector) {
+            options = {};
+            let style = document.querySelector(selector).style.cssText
+            style
+                .split(/;\s*/)
+                .filter(x => x != "")
+                .forEach(row => {
+                    let args = row.split(/:\s*/);
+                    options[args[0]] = args[1];
+            });
+            return options;
+        }     
+
+        let blue_block = new BlockElement(getOptions("div"), "div", "blue_block_class");
+        console.log(blue_block);
+        blue_block.setColor("blue");
+        blue_block.setSize(120);
+
+        //task 3
+
+        let circle = new BlockElement(getOptions("div"), "div", "circle_class");
+        circle.setSize(90);
+        circle.setColor("green");
+        circle.setCircle(45);
+
+        //task 4
+
+        class Input{
+            constructor(id, color, width, height){
+                this.id = id;
+                this.color = color;
+                this.width = width;
+                this.height = height;
+                this.create();
+            }
+
+            create(){
+                let element = document.createElement("input");
+                element.type = "text";
+                element.value = "some text";
+                element.style.background = this.color;
+                element.style.width = this.width + "px";
+                element.style.height = this.height + "px";
+                document.body.append(element);
+                element.setAttribute("id", this.id);
+            }
+        }
+
+        let input = new Input(1, "pink", 150, 50);
+
+        class secondInput extends Input{
+            constructor(id, color, width, height, border){
+                super(id, color, width, height);
+                this.border = border;
+                document.getElementById(this.id).style.border = border;
+            }
+        }
+
+        let second_input = new secondInput(2, "yellow", 120, 100, "2px red solid");
+
+        class thirdInput extends Input{
+            constructor(id, color, width, height, padding){
+                super(id, color, width, height);
+                this.padding = padding;
+                document.getElementById(this.id).style.padding = padding;
+            }
+        }
+
+        third_input = new thirdInput(3, "orange", 100, 30, "20px 30px");
+
+        class FourthInput extends Input{
+            constructor(id, color, width, height, borderRadius){
+                super(id, color, width, height);
+                this.borderRadius = borderRadius;
+                document.getElementById(this.id).style.borderRadius = borderRadius;
+            }
+        }
+
+        fourth_input = new FourthInput(4, "skyblue", 180, 50, "20px");  
+        
+    </script>
+</body>
+</html>

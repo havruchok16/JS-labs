@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>LABA 9</title>
+</head>
+<body>
+    <script>
+        //task 1
+        let square = {
+            width: 10,
+            color: "yellow"
+        }
+        let _square = {
+            width: 5
+        }
+        _square.__proto__ = square;
+
+        let circle =  {
+            radius: 5,
+            color: "transparent" 
+        }
+        let _circle = {
+            color: "green"
+        }
+        _circle.__proto__ = circle;
+
+        let triangle = {
+            count_line: 1,
+            color: "transparent"
+        }
+        let _triangle = {
+            count_line: 3
+        }
+        _triangle.__proto__ = triangle;
+
+        console.log(square);
+        console.log(_square);
+        console.log(circle);
+        console.log(_circle);
+        console.log(triangle);
+        console.log(_triangle);
+
+
+        //task 2
+
+        class Validator{
+            constructor(string){
+                this.string = string;
+            }
+
+            isEmail(){
+                let check = (this.string.length != 0 
+                && this.string.includes("@") 
+                && this.string.includes(".")) ? true : false;
+                return check;
+            }
+
+            isDomain(){
+                let check = (this.string.substr(-3,3) == ".by" 
+                || this.string.substr(-4,4) == ".бай") ? true : false;
+                return check;
+
+            }
+
+            isDate(){
+                let check = (Number(this.string.substr(0,2)) < 32
+                && Number(this.string.substr(2,2)) < 13 
+                && Number(this.string.substr(6,4)) < 2022 ) ? true : false;
+                return check;
+            }
+
+            isPhone(){
+                let check = (this.string.length == 9 && 
+                (this.string.substr(0,2) == "29" 
+                || this.string.substr(0,2) == "44") ) ? true : false;
+                return check;
+            }
+        }
+
+        let email = new Validator("yana.havrukova@mail.ru")
+        console.log(email.isEmail());
+        let domain = new Validator("aererg.by")
+        console.log(domain.isDomain());
+        let date = new Validator("15.11.2021");
+        console.log(date.isDate());
+        let phone = new Validator("447654321");
+        console.log(phone.isPhone());
+
+        //task 3
+
+        class Student{
+            constructor(name, surname, fuck, id){
+                this.name = name;
+                this.surname = surname;
+                this.fuck = fuck;
+                this.id = id;
+            }
+
+            getFullName(){
+                return this.name + "\t" + this.surname;
+            }
+            getCourse(){
+                let course = 22 - Number(this.id.substr(2,2));
+                return course;
+            }
+
+            static getDev(array){
+                let count = 0;
+                for (let student of students.values()) {
+                    if(student.id.substr(1,1) == 3){
+                        count++;
+                    }
+                }
+                return count;
+            }
+        }
+
+        let students = new Map();
+
+        students.set(1, new Student("Yana", "Havruchok", "FIT", "73191123"))
+                .set(2, new Student("Olga", "Babitch", "FIT", "73192124"))
+                .set(3, new Student("Kirill", "Sinyk", "FIT", "73191125"))
+                .set(4, new Student("Dmitry", "Dmitryk", "FIT", "71202126"))
+                .set(5, new Student("Tim", "Timosha", "FIT", "72192127"))
+                .set(6, new Student("Evgeny", "Geshka", "FIT", "71202128"))
+                .set(7, new Student("Tanya", "Tanchik", "FIT", "73182129"))
+                .set(8, new Student("Unknow", "Unknowich", "FIT", "74212111"))
+                .set(9, new Student("Fergbesr", "Twifnds", "FIT", "72212112"))
+                .set(10, new Student("Yiawegn", "Tiwfnwfw", "FIT", "71212113"))
+        
+        let stud = new Student("Asd", "Sdf", "FIT", "72191122");
+        console.log(stud.getFullName());
+        console.log(stud.getCourse());
+        console.log(Student.getDev());
+
+        //table
+        function output(){ 
+            document.write("<table border=1 cellpadding = 5>");
+            document.write("<th>FIT</th>");
+            document.write("<tr><td>1 course:</td>");
+                for (let student of students.values()) {
+                    if(student.id.substr(2,2) == 21){
+                        document.write("<td> " + student.getFullName() + "</td>");    
+                    }
+                }   
+            document.write("</tr>");
+            document.write("<tr><td>2 course:</td>");
+                for (let student of students.values()) {
+                    if(student.id.substr(2,2) == 20){
+                        document.write("<td> " + student.getFullName() + "</td>");    
+                    }
+                }                
+            document.write("</tr>");
+            document.write("<tr><td>3 course:</td>");
+                for (let student of students.values()) {
+                    if(student.id.substr(2,2) == 19){
+                        document.write("<td> " + student.getFullName() + "</td>");    
+                    }
+                }                
+            document.write("</tr>");
+            document.write("<tr><td>4 course:</td>");
+                for (let student of students.values()) {
+                    if(student.id.substr(2,2) == 18){
+                        document.write("<td> " + student.getFullName() + "</td>");    
+                    }
+                }                
+            document.write("</tr>");
+            document.write("</table>");
+        }
+        output();
+
+
+    </script>
+</body>
+</html>
